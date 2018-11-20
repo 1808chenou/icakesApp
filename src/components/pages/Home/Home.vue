@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div id='Home'>
     <div class="home_nav">
       <div class="swiper-container">
@@ -13,6 +14,12 @@
      <div class="list">
     <HomeList :path="selInit"></HomeList>
     <BackTop></BackTop>
+=======
+  <div id="Home">
+    <Banner></Banner>
+    <list></list>
+    <Ad v-for='(item,idx) in num' :key='idx' :test=item></Ad>
+>>>>>>> 4016c761ece921d6ed76a07449ec11dccf26e7da
   </div>
 
   </div>
@@ -20,6 +27,7 @@
 <!--  :class='selInit==item.path?"sel":""' -->
  <!-- @click='toggle(item.path)' -->
 <script>
+<<<<<<< HEAD
 import Swiper from 'swiper'
 import HomeList from './HomeList.vue'
 import BackTop from './BackTop.vue'
@@ -61,12 +69,31 @@ export default{
     
 } 
 
+=======
+import Banner from './banner1.vue'
+import List from './list.vue'
+import Ad from './ad.vue'
+
+
+export default {
+  name: 'Home',
+  components: {
+    Banner,List,Ad
+  },
+  data(){
+  	return{
+  		num:[{path:'http://asset.ibanquan.com/image/5a38e429b1b9575cd9000319/s.jpeg?v=1513677865',pm:1},{path:'http://asset.ibanquan.com/image/5a38da3c0dd76c175d0002dc/s.jpeg?v=1513675325',pm:3}]
+  	}
+  }
+}
+>>>>>>> 4016c761ece921d6ed76a07449ec11dccf26e7da
 </script>
 
 <style lang="less" scoped>
 @import url('../../../../node_modules/swiper/dist/css/swiper.min.css');
 @import url(../../../styls/main.less);
 #Home {
+<<<<<<< HEAD
   
   .padding(45,0,0,0);
   .home_nav{
@@ -93,5 +120,8 @@ export default{
       }
      }
    }
+=======
+  .margin(45,0,50,0);
+>>>>>>> 4016c761ece921d6ed76a07449ec11dccf26e7da
 }
 </style>

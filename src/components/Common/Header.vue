@@ -26,8 +26,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   background: #FFF;
   z-index: 9999;
+=======
+  z-index:999;
+  background: #fff;
+>>>>>>> 4016c761ece921d6ed76a07449ec11dccf26e7da
   img{
   	.w(65);
   	.h(30);
