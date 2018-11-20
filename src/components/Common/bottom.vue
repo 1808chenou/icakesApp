@@ -44,6 +44,8 @@ export default {
   display: flex;
   .fs(12);
   justify-content: space-around;
+   background: #FFF;
+  z-index: 9999;
   li{
     display: flex;
     flex-direction: column;

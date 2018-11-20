@@ -6,13 +6,13 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
-    // Paths
+// http://icak.es/api/v1/type/view?handle=cupcakes&token=9dd5934c294149a8aaba5a3540d7f709&rnd=1542698947024
+//     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
         '/api':{ //小暗号
-            target:'https://m.maizuo.com/',//目标服务器
+            target:'http://icak.es/',//目标服务器
             changeOrigin:true,//是否允许代理
             pathRewrite:{'^/api':''}// 匹配请求接口
         }

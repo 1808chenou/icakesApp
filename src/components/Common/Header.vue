@@ -26,9 +26,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #FFF;
+  z-index: 9999;
   img{
   	.w(65);
   	.h(30);
+    
   }
 }
 </style>
