@@ -19,8 +19,9 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  
+<style lang="less" scoped>
+@import url(../../../styls/main.less);
+#Home {
+  .padding(45,0,0,0);
 }
 </style>
