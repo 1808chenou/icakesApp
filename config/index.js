@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/api':{ //小暗号
-            target:'https://m.maizuo.com/',//目标服务器
+            target:'http://icak.es/',//目标服务器
             changeOrigin:true,//是否允许代理
             pathRewrite:{'^/api':''}// 匹配请求接口
         }

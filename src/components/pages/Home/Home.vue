@@ -1,15 +1,15 @@
 <template>
   <div id="Home">
-    {{name}}
+    <Banner></Banner>
   </div>
 </template>
 
 <script>
-
+import Banner from './banner1.vue'
 export default {
   name: 'Home',
   components: {
-    
+    Banner
   },
   data(){
   	return{
