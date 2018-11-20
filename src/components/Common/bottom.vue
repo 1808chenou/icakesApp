@@ -35,6 +35,8 @@ export default {
 <style lang="less" scoped>
 @import url(../../styls/main.less);
 .bottom {
+  z-index:99;
+  background: #fff;
   border-top: 1px solid #d5d5d5;
   position: fixed;
   bottom: 0px;

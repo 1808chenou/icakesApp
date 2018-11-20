@@ -1,10 +1,16 @@
 <template>
   <div class="banner">
-   	   <div class="swiper-container">
+   	   <div class="swiper-container" id="swiper1">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">
+              <img src="http://asset.ibanquan.com/asset/5b75955920663d67c6000158/index_slide_2?v=1534432601" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="http://asset.ibanquan.com/asset/5bc963ef53f4e32535000064/index_slide_1?v=1539924975" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="http://asset.ibanquan.com/asset/5bc962bd26a801265b000040/index_slide_3?v=1539924669" alt="">
+            </div>
           </div>
           <!-- Add Pagination -->
           <div class="swiper-pagination"></div>
@@ -27,22 +33,12 @@ export default {
     }
   },
   methods:{
-    getdata(){
-      this.$axios.get('/api/api/v1/cart/?token=9dd5934c294149a8aaba5a3540d7f709&rnd=1542697760605', {
-        params: {
-          ID: 12345
-        }
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
+    
   },
   mounted(){
-     var swiper = new Swiper('.swiper-container', {
+     var swiper1 = new Swiper('#swiper1', {
+      loop: true,
+      slidesPerView: 1,
       spaceBetween: 30,
       centeredSlides: true,
       autoplay: {
@@ -66,8 +62,12 @@ export default {
 @import url(../../../styls/main.less);
 @import url('../../../../node_modules/swiper/dist/css/swiper.min.css');
 .banner {
+  border-bottom: 1px solid #f0f0f0;
   .w(375);
-  .h(236);
-  background: pink;
+    .h(236);
+  img{
+    .w(375);
+    .h(236);
+  }
 }
 </style>
