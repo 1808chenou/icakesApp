@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # icakes
 <<<<<<< HEAD
 
@@ -23,3 +24,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 =======
 蛋糕app
 >>>>>>> 775c01f8fca045f56280656d88338741ec0bf2a8
+=======
+# icakesApp
+vue项目
+>>>>>>> a4c1df5b3aaed6c972d30704b65f12804905679f
