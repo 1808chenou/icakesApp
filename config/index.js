@@ -11,15 +11,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-<<<<<<< HEAD
-        '/api':{ //小暗号
-=======
-        '/test':{ //小暗号
->>>>>>> 4016c761ece921d6ed76a07449ec11dccf26e7da
-            target:'http://icak.es/',//目标服务器
-            changeOrigin:true,//是否允许代理
-            pathRewrite:{'^/test':'/'}// 匹配请求接口
-        }
+
+       
     },
 
     // Various Dev Server settings

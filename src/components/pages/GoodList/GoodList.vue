@@ -26,7 +26,7 @@ import { InfiniteScroll } from 'mint-ui';
 Vue.use(InfiniteScroll);
 
 export default{
-	name:'HomeList',
+	name:'GoodList',
 	components:{},
   props:['path'],
     data(){
