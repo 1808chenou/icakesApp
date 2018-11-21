@@ -32,8 +32,8 @@ export default{
     data(){
     	return {
         homeList:[],
-        name:112
-        
+        name:112,
+        // path:''
       }
     },
    methods:{
@@ -59,7 +59,9 @@ export default{
     }
   },
     created(){
-        this.getData()
+        this.getData(),
+        console.log(this.$route.params.total);
+        this.path=this.$route.params.total;
       }
 }	
 

@@ -1,21 +1,9 @@
 <template>
   <div id="bottom">
    	<ul class="bottom">
-      <li>
+      <li v-for='(item,idx) in bottomlist' :key='idx' @click='change(item.path)'>
         <p><i class="fa fa-university" aria-hidden="true"></i></p>
-        <p>首页</p>
-      </li>
-      <li>
-        <p><i class="fa fa-th-large" aria-hidden="true"></i></p>
-        <p>分类列表</p>
-      </li>
-      <li>
-        <p><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></p>
-        <p>购物车</p>
-      </li>
-      <li>
-        <p><i class="fa fa-user" aria-hidden="true"></i></p>
-        <p>我</p>
+        <p>{{item.name}}</p>
       </li>
     </ul>
   </div>
@@ -28,6 +16,16 @@ export default {
   name: 'bottom',
   components: {
     
+  },
+  data(){
+    return {
+      bottomlist:[{name:'首页',path:'/home'},{name:'分类列表',path:'/good'}]
+    }
+  },
+  methods:{
+    change(path){
+      this.$router.push(path);
+    }
   }
 }
 </script>

@@ -4,7 +4,7 @@
       <div class="swiper-container">
         <ul class="swiper-wrapper">
           <li class="swiper-slide" v-for='(item,index) in navlist'
-              @click='toggle(item.path)'>{{item.title}}</li>
+              @click='toggle(item.path)' :id='item.path==selInit?"sel":""'>{{item.title}}</li>
         </ul>
     <!-- Add Pagination -->
           <div class="swiper-pagination"></div>
@@ -85,12 +85,11 @@ export default{
          .lh(29);
          text-align:center;
       }
-      .sel{
+      #sel{
         border-bottom:2px solid #000;
         color:#000;
-
-        
       }
+      
      }
    }
 }
