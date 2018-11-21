@@ -19,7 +19,14 @@ import  store from './store'
 // mint-ui的使用
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
-
+//注册全局过滤器
+// Vue.filter('quo', function(value){
+// 	console.log(value)
+// 	let str = value.toString()
+// 	let newstr = str.substring(0,str.length-2);
+// 	return newstr
+   
+// })
 Vue.use(MintUI)
 /* eslint-disable no-new */
 new Vue({

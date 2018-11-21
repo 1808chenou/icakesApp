@@ -1,7 +1,7 @@
 <template>
 <ul class='homeList'>
   <!-- text-transform:capitalize; -->
-       <li  v-for='(item,index) in homeList' :key='index'>
+       <li  v-for='(item,index) in homeList' :key='index'  @click='toDetail(index)'>
         <div class="hezi">
           <img :src="item.feature_image.src" alt="">
         </div>
@@ -50,7 +50,13 @@ export default{
       .catch((err)=>{
         console.log(err)
       })
-      }
+      },
+      toDetail(index){
+      this.$router.push({name:'Detail',params:{
+        idx:index,
+        detailpath:this.path
+      }})
+    }
   },
   watch:{
     path:function(newVal,oldVal){
@@ -59,9 +65,9 @@ export default{
     }
   },
     created(){
-        this.getData(),
-        console.log(this.$route.params.total);
-        this.path=this.$route.params.total;
+        this.getData()
+        // console.log(this.$route.params.total);
+        // this.path=this.$route.params.total;
       }
 }	
 

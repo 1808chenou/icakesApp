@@ -1,9 +1,13 @@
 <template>
-  <div id="Home">
+  <div>
+    <div id="Home">
     <Banner></Banner>
     <list></list>
     <Ad v-for='(item,idx) in num' :key='idx' :test=item></Ad>
   </div>
+  <bottom></bottom>
+  </div>
+  
 
   
   </template>
@@ -11,12 +15,13 @@
 import Banner from './banner1.vue'
 import List from './list.vue'
 import Ad from './ad.vue'
+import bottom from '../../Common/bottom.vue'
 
 
 export default {
   name: 'Home',
   components: {
-    Banner,List,Ad
+    Banner,List,Ad,bottom
   },
   data(){
   	return{

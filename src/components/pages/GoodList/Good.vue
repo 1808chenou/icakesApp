@@ -14,6 +14,7 @@
     <GoodList :path="selInit"></GoodList>
     <BackTop></BackTop>
   </div>
+  <bottom></bottom>
 
   </div>
   </template>
@@ -23,9 +24,10 @@
 import Swiper from 'swiper'
 import GoodList from './GoodList.vue'
 import BackTop from './BackTop.vue'
+import bottom from '../../Common/bottom.vue'
 export default{
   name:'Home',
-  components:{GoodList,BackTop},
+  components:{GoodList,BackTop,bottom},
     data(){
       return {
         navlist:[{title:"生日蛋糕",path:'http://icak.es/api/v1/type/view?handle=bdcakes&token=9dd5934c294149a8aaba5a3540d7f709&rnd=1542713382991'},
@@ -50,9 +52,17 @@ export default{
       },
       toggle(item){
         this.selInit = item 
+        console.log(this.selInit)
 
       }
     },
+    created(){
+      if(this.$route.params.total){
+        this.selInit=this.$route.params.total;
+        console.log(this.selInit)
+        console.log(0)
+      }
+      },
     mounted(){
     this.initSwiper()
     }

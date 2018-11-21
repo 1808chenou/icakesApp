@@ -8,11 +8,13 @@ import VueRouter from 'vue-router';
 
 import Home  from '../components/pages/Home/Home'
 import GoodList  from '../components/pages/GoodList/Good.vue'
+import Detail  from '../components/pages/Detail/detail.vue'
 const router = new VueRouter({
   routes:[
    {  path: '/',redirect:'/home'},//重定向
    { path: '/home', component: Home ,name:'Home'},
-   { path: '/good', component: GoodList ,name:'GoodList'}
+   { path: '/good', component: GoodList ,name:'GoodList'},
+   { path: '/detail', component: Detail ,name:'Detail'}
   ]
 })
 
