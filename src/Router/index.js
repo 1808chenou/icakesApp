@@ -8,11 +8,18 @@ import VueRouter from 'vue-router';
 
 import Home  from '../components/pages/Home/Home'
 import GoodList  from '../components/pages/GoodList/Good.vue'
+import My  from '../components/pages/My/my.vue'
+import Login  from '../components/pages/My/login.vue'
+import Reg  from '../components/pages/My/reg.vue'
 const router = new VueRouter({
   routes:[
    {  path: '/',redirect:'/home'},//重定向
    { path: '/home', component: Home ,name:'Home'},
-   { path: '/good', component: GoodList ,name:'GoodList'}
+   { path: '/good', component: GoodList ,name:'GoodList'},
+   { path:'/my',component:My, name:'my',children:[
+   			{ path:'login',component:Login, name:'login'},
+   			{ path:'reg',component:Reg, name:'reg'},
+   ]}
   ]
 })
 

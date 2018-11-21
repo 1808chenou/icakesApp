@@ -2,7 +2,7 @@
   <div class="list">
    	<ul>
       <li v-for='(item,idx) in typelist' :key='idx' @click='fenlei(item)'>
-        <img :src="item.img" alt="">
+        <img v-lazy="item.img" alt="">
         <p>{{item.name}}</p>
       </li>
     </ul>
@@ -11,7 +11,10 @@
 
 <script>
 
+import Vue from 'vue'
+import { Lazyload } from 'mint-ui';
 
+Vue.use(Lazyload);
 export default {
   name: 'list',
   components: {

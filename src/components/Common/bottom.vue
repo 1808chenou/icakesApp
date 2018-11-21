@@ -33,7 +33,7 @@ export default {
 <style lang="less" scoped>
 @import url(../../styls/main.less);
 .bottom {
-  z-index:99;
+    z-index: 9999;
   background: #fff;
   border-top: 1px solid #d5d5d5;
   position: fixed;
@@ -45,7 +45,7 @@ export default {
   .fs(12);
   justify-content: space-around;
    background: #FFF;
-  z-index: 9999;
+
   li{
     display: flex;
     flex-direction: column;

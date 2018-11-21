@@ -4,6 +4,13 @@ import Vue from 'vue'
 import App from './App'
 
 Vue.config.productionTip = false
+
+Vue.filter('getDate', function (value) {
+	let str = value.toString()
+	let newStr = str.substring(0,str.length-2);
+
+  return  newStr
+})
 //路由
 import  router from  './router'
 //引入全局配置样式
