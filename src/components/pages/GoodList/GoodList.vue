@@ -3,14 +3,14 @@
   <!-- text-transform:capitalize; -->
        <li  v-for='(item,index) in homeList' :key='index'  @click='toDetail(index)'>
         <div class="hezi">
-          <img :src="item.feature_image.src" alt="">
+          <img v-lazy="item.feature_image.src" alt="">
         </div>
         <div class="paiban">
           <p class="ename"><b>{{item.vendor.name}}</b></p>
           <p class="cname">{{item.name}}</p>
           <p class="miaoshu">{{item.short_desc}}</p>
           <div class="haha">
-            <span class="jiage"><b>￥{{item.price}}</b></span>
+            <span class="jiage"><b>￥{{item.price|getDate}}</b></span>
             <span class="buya">购买</span>
           </div>
         </div> 
@@ -23,6 +23,9 @@
   import  Vue from 'vue';
 import { Toast } from 'mint-ui';
 import { InfiniteScroll } from 'mint-ui';
+import { Lazyload } from 'mint-ui';
+
+Vue.use(Lazyload);
 Vue.use(InfiniteScroll);
 
 export default{
@@ -76,14 +79,15 @@ export default{
 @import url('../../../styls/main.less');
 .homeList{
     .w(375);
-
     margin: 0px auto;
   li{
     float:left;
     .w(175);
     .padding(15,5,15,5);
     border-top: 2px solid #EDEDED;
-    border-left: dashed 1px #c9c9c9;
+    border-left: 1px solid #EDEDED;
+    border-right: 1px solid #EDEDED;
+    border-bottom: 1px solid #EDEDED;
 
     .hezi{
       .w(175);
@@ -94,6 +98,7 @@ export default{
       } 
     }
     .paiban{
+
       .w(170);
       .ename{
         display: block;
@@ -147,6 +152,6 @@ export default{
     }
     
   }
-  
+   
 }
 </style>

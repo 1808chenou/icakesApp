@@ -5,16 +5,25 @@
         <ul class="swiper-wrapper">
           <li class="swiper-slide" v-for='(item,index) in navlist'
               @click='toggle(item.path)' :id='item.path==selInit?"sel":""'>{{item.title}}</li>
+         
         </ul>
+        <i class="fa fa-caret-right jiantou" aria-hidden="true" ></i>
     <!-- Add Pagination -->
           <div class="swiper-pagination"></div>
       </div>
+         
   </div>
-     <div class="list">
+  <div class="list">
     <GoodList :path="selInit"></GoodList>
     <BackTop></BackTop>
+     <img src="http://asset.ibanquan.com/asset/5a32190722bd3406c000226f/footer_have_none?design_theme_id=0&v=1513232647" alt="">
   </div>
+
   <bottom></bottom>
+
+  
+   
+
 
   </div>
   </template>
@@ -54,6 +63,9 @@ export default{
         this.selInit = item 
         console.log(this.selInit)
 
+      },
+      leave(){
+
       }
     },
     created(){
@@ -77,9 +89,15 @@ export default{
 @import url('../../../../node_modules/swiper/dist/css/swiper.min.css');
 @import url(../../../styls/main.less);
 #Home {
-  
+  // .margin(45,0,50,0);
   .padding(45,0,0,0);
   .home_nav{
+    .jiantou{
+      position: fixed;
+      .right(2);   
+      .top(50);
+      .fs(20);
+    }
      ul{
        // .w(350);
        // margin: 0px auto;
@@ -102,5 +120,13 @@ export default{
       
      }
    }
+   .list{
+    .margin(0,0,51,0);
+      img{
+      // .w(318);
+      .h(150);
+          text-align: center;
+    }
+   } 
 }
 </style>
