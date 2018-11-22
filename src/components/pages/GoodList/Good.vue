@@ -35,7 +35,7 @@ import GoodList from './GoodList.vue'
 import BackTop from './BackTop.vue'
 import bottom from '../../Common/bottom.vue'
 export default{
-  name:'Home',
+  name:'good',
   components:{GoodList,BackTop,bottom},
     data(){
       return {
@@ -68,6 +68,14 @@ export default{
 
       }
     },
+    //  beforeRouteLeave(to, from, next) {
+    //    if (from.path == "/detail") {
+    //     from.meta.keepAlive = true;
+    //   } else {
+    //     from.meta.keepAlive = false;
+    //   }
+    //   next();
+    // },
     created(){
       if(this.$route.params.total){
         this.selInit=this.$route.params.total;
@@ -75,6 +83,14 @@ export default{
         console.log(0)
       }
       },
+      activated(){
+        console.log('hhhh')
+        if(this.$route.params.total){
+        this.selInit=this.$route.params.total;
+        console.log(this.selInit)
+        console.log(0)
+      }
+    },
     mounted(){
     this.initSwiper()
     }

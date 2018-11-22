@@ -26,9 +26,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #FFF;
-  z-index: 9999;
-  z-index:999;
+  z-index:99;
   background: #fff;
   img{
   	.w(65);

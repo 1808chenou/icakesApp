@@ -3,7 +3,12 @@
   	<Header></Header>
     <!-- <Home></Home> -->
     <!-- <My></My> -->
-      <router-view></router-view>	
+      <!-- <router-view></router-view>	 -->
+      <keep-alive include="good">
+          <router-view></router-view>
+      </keep-alive>
+      
+     <!--  <router-view v-if="!$route.meta.keepAlive"></router-view> -->
 	<!-- <bottom></bottom> -->
   </div>
 </template>

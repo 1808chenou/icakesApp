@@ -27,7 +27,11 @@ export default {
   	return{
   		num:[{path:'http://asset.ibanquan.com/image/5a38e429b1b9575cd9000319/s.jpeg?v=1513677865',pm:1},{path:'http://asset.ibanquan.com/image/5a38da3c0dd76c175d0002dc/s.jpeg?v=1513675325',pm:3}]
   	}
-  }
+  },
+  activated(){
+        console.log('homehhhh')
+}
+   
 }
 </script>
 

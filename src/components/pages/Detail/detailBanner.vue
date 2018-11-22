@@ -43,8 +43,6 @@ export default {
     lunbo(){
       var swiper1 = new Swiper('#swiper1', {
       loop: true,
-      slidesPerView: 1,
-      spaceBetween: 30,
       centeredSlides: true,
       autoplay: {
         delay: 2500,
