@@ -1,16 +1,16 @@
 <template>
 	<div class='my'>
-		 <!-- 这是我的界面 -->
-     <!-- <My></My> -->
      <router-view></router-view>
+     <bottom></bottom>
 	</div>
+
 </template>
 
 <script>
-
+import bottom from '../../Common/bottom.vue'
 export default{
 	name:'My',
-	components:{},
+	components:{bottom},
     data(){
     	return {
           
