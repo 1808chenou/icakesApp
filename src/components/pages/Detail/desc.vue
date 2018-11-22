@@ -4,7 +4,7 @@
           <p class="ename"><b>{{test.handle}}</b></p>
           <p class="cname">{{test.name}}</p>
           <p class="miaoshu">{{test.short_desc}}</p>
-          <p class="jiage"><b>￥{{test.price_min}}-￥{{test.price_max}}</b></p>
+          <p class="jiage"><b>￥{{test.price_min|getDate}}-￥{{test.price_max|getDate}}</b></p>
     </div>
     <div class="time">
        <div class="left">

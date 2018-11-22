@@ -11,7 +11,7 @@
          <div class="laji">
              <div class="wang"><span>忘记密码?</span></div>
              <div class="gologin">
-                 <span>立刻注册</span>
+                 <span>立即注册</span>
              </div>
          </div>
 	</div>
@@ -41,7 +41,7 @@ export default{
 .login{
     background: #EEEFF0;
    .padding(45,0,0,0);
-   .h(520);
+   .h(220);
     .jibai{
         .padding(0,15,0,15);
         text-align: center;
@@ -98,6 +98,7 @@ export default{
              .margin(0,0,0,15);
             .w(345);
             .h(42);
+            .fs(16);
             background: #000;
             color:#FFF;
         }
