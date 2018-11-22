@@ -1,18 +1,19 @@
 <template>
   <div class="car">
-    xxx
+    <bottom></bottom>
   </div>
   
 
   
   </template>
 <script>
+import bottom from '../../Common/bottom.vue'
 
 
 export default {
   name: 'car',
   components: {
-    
+    bottom
   },
   data(){
   	return{
