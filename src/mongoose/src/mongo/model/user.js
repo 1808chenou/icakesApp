@@ -5,7 +5,7 @@
  	// _id:{type:Number,required:true},
  	name:{type:String,required:true},
  	pass:{type:String,required:true},
- 	// mail:{type:String,required:true},
+ 	mail:{type:String,required:true},
  	// shijian:{type:String,required:true}
  })
  // 将schema 对象转化为数据模型  model

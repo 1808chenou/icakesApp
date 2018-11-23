@@ -3,7 +3,7 @@ const Router=express.Router();
 //数据模型引入
 const User=require('../mongo/model/user.js')
 const Goods=require('../mongo/model/goods.js')
-// const email=require('../mongo/model/sendmail.js')
+const email=require('../mongo/model/sendmail.js')
 /**
  * @api {get} /admin/login/ login
  * @apiName login
@@ -56,12 +56,12 @@ Router.post('/getUserInfo',(req,res)=>{
 Router.post('/getsign',(req,res)=>{
 // 1.接受数据
 
-  let {name,pass,code,mail,shijian}=req.body
-  console.log(name,pass,code,mail,shijian)
+  let {name,pass,code,mail}=req.body
+  console.log(name,pass,code,mail)
   if (check[mail]==code) {
        //插入数据库
        // res.send('验证码正确')
-       User.insertMany({name,pass})
+       User.insertMany({name,pass,mail})
        .then((data)=>{
         console.log(mail)
         res.send({err:0,msg:'注册成功',data:null})
@@ -73,7 +73,7 @@ Router.post('/getsign',(req,res)=>{
        })
        
    }else{
-        res.send('ok')
+        res.send('nook')
    }
 })
 

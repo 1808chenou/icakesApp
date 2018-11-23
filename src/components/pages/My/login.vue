@@ -31,6 +31,7 @@ export default{
     },
     methods:{
          login(){
+            this.shuoming='';
             if(this.userName == "" && this.password == ""){
             this.shuoming = '请输入账号名密码'
              return;
@@ -51,11 +52,49 @@ export default{
                         } else if(!/^[\u4e00-\u9fa5a-zA-Z0-9]{6,}$/.test(this.password)){
                           this.shuoming = '密码不合法'
                         }
+
+                        if(/^[\u4e00-\u9fa5a-zA-Z0-9]{6,}$/.test(this.password) && /^1[3456789]\d{9}$/.test(this.userName)) {
+
+
+                    this.$axios.post('/api/admin/getlogin',this.$qs.stringify({
+                            name:this.userName,
+                            pass:this.password,
+
+                        })
+                    )
+               .then((res)=> {
+                    console.log(res);
+                    if(res.data.err==0){
+                            console.log('登录成功')
+                            console.log(res.data.data[0].name)
+                            let storage = window.localStorage
+                        storage.setItem("name",res.data.data[0].name)
+                        storage.setItem("password",res.data.data[0].pass)
+                        }else if(res.data.err==-1){
+                            alert("账号或密码错误")
+                        }          
+  
+                  })
+                  .catch((err)=> {
+                    console.log(err);
+                  });
+                        }
             }           
         },
          change(){
             this.$router.push('/my/reg');
+        },
+        getlogin(){
+              
+
         }
+        // this.$axios.post('/api/admin/getlogin',this.$qs.stringify({
+        //             name:this.userName,
+        //             pass:this.password,
+        //             mail:this.umail,
+        //             code:this.ucode
+        //           })
+            // )
     },
     computed:{
     	
@@ -123,7 +162,7 @@ export default{
             .h(25);
             .fs(14);
             .lh(25);
-            color:#F40606;
+            color:#333;
             float:left;
             text-align: center;
 

@@ -1,9 +1,12 @@
 <template>
     <div class='reg'>
-         <div action="javascript:void(0);" class="jibai">
-          <label class='xixi '>账号<input type="text" name="" placeholder="手机" class="uname" v-model="userName"></label><br>
+         <div action="javascript:void(0);" class="jibai">        
+          <label class='xixi' >账号<input type="text" name="" placeholder="手机" class="uname" v-model="userName"  ></label><br>
+          <label class='xixi '>邮箱<input type="text" name="" placeholder="邮箱" class="umail" v-model="umail"></label><br>
+          <label class='xixi '>验证码<input type="text" name=""  placeholder="邮箱验证码" class="ucode" v-model="ucode"></label><input type="button" class="getcode" value="获取验证码" @click="sendmail"><br>
            <label class='haha'>设置密码<input type="password" name="" placeholder="请输入密码" class="upassword" v-model="password"></label><br>
            <label class='haha'>确认密码<input type="password" name="" placeholder="请输入密码" class="enterword" v-model="enterword"></label><br>
+
            </div>
             <p class="shuoming">{{shuoming}}</p>
 
@@ -16,7 +19,7 @@
 </template>
 
 <script>
-
+import { Toast } from 'mint-ui';
 export default{
     name:'Reg',
     components:{},
@@ -24,12 +27,43 @@ export default{
         return {
            userName: '',
             password: '',
+            umail:'',
+            ucode:'',
             enterword:'',
-            shuoming:''
+            shuoming:'',
+            haha:false
         }
     },
     methods:{
+        gao(){
+            console.log(this.haha)
+            
+            return this.haha=true;
+
+        },
+        sendmail(){
+            this.$axios.post('/api/admin/getCode',this.$qs.stringify({
+                mail:this.umail
+            })
+            )
+            .then((res)=> {
+                    console.log(res.data)
+                    console.log('验证码发送成功')    
+                  })
+            .catch((err)=> {
+                    console.log(err);
+                    console.log('验证码发送失败')
+                  });         
+        },
         login(){
+            this.shuoming='';
+            if(this.umail == "" ){
+            this.shuoming = '请输入邮箱'
+             return;
+            }else if(!/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(this.umail)){
+                this.shuoming = '邮箱不合法'
+            }
+           
             if(this.userName == "" && this.password == ""){
             this.shuoming = '请输入账号名密码'
              return;
@@ -46,7 +80,7 @@ export default{
                 if (this.password === ''){
                      this.shuoming = '请输入密码'
                     } else if(!/^[\u4e00-\u9fa5a-zA-Z0-9]{6,}$/.test(this.password)){
-                      this.shuoming = '密码不合法'
+                      this.shuoming = '密码不少于6位'
                     }
                 if (this.enterword === ''){
                      this.shuoming = '请输入密码'
@@ -54,25 +88,53 @@ export default{
                       this.shuoming = '密码不一样'
                     }
             }
-
-            if(this.password == this.enterword && /^[\u4e00-\u9fa5a-zA-Z0-9]{6,}$/.test(this.password) && /^1[3456789]\d{9}$/.test(this.userName) ){
+             if(this.ucode == "" ){
+                this.shuoming = '请输入验证码'
+             return;
+            }
+                
+            if(this.password == this.enterword && /^[\u4e00-\u9fa5a-zA-Z0-9]{6,}$/.test(this.password) && /^1[3456789]\d{9}$/.test(this.userName) &&/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(this.umail) && this.ucode!=''){
                 // http://127.0.0.1:4000/admin/getsign
 
                   this.$axios.post('/api/admin/getsign',this.$qs.stringify({
                     name:this.userName,
-                    pass:this.password
+                    pass:this.password,
+                    mail:this.umail,
+                    code:this.ucode
                   })
                     )
                   .then((res)=> {
-                    console.log(res.data)
-                          console.log(456)    
+                    console.log(res);
+                    if(res.data.err==0){
+                        Toast({
+                      message: '注册成功',
+                      duration: 1000,
+                      iconClass: 'fa fa-check'
+                    });
+                    this.$router.push('/my/login');
+                    console.log("注册成功");
+                    console.log(res.data);
+                    }else if(res.data=='nook'){
+                     console.log("验证码错误");
+
+                     Toast({
+                      message: '验证码错误',
+                      duration: 1000,
+                      iconClass: 'fa fa-check'
+                    });
+
+                    }   
                   })
                   .catch((err)=> {
                     console.log(err);
-                    console.log(8963)
                   });
                 // console.log('注册成功')
             }else{
+                 Toast({
+                  message: '注册失败',
+                  duration: 1000,
+                  iconClass: 'fa fa-check'
+                });
                 console.log('注册失败')
             }          
         },
@@ -133,6 +195,48 @@ export default{
                 // border-bottom:1px solid #DDDDDD;
                 outline:none;
                  border-radius:0px;
+        }
+        .umail{
+                .padding(0,0,0,42);
+                // float: right;
+                .w(270);
+                .h(40);
+                // .lh(45);
+                .fs(15);
+                color: #333;
+                border: none;
+                // border-bottom:1px solid #DDDDDD;
+                outline:none;
+                 border-radius:0px;
+        }
+         .ucode{
+                .padding(0,0,0,30);
+                // float: right;
+                .w(200);
+                .h(40);
+                // .lh(45);
+                .fs(15);
+                color: #333;
+                border: none;
+                // border-bottom:1px solid #DDDDDD;
+                outline:none;
+                 border-radius:0px;
+                 border-right:1px solid #DDDDDD;
+
+        }
+        .getcode{
+         
+            display: inline-block;
+            float: right;
+            .w(70);
+            // .h(40);
+            .lh(40);
+            .fs(14);
+            color: #333;
+            background: #FFF;
+            border: none;
+            outline:none;
+            border-top:1px solid #DDDDDD;
         }
         .upassword{
                 .padding(0,0,0,15);
