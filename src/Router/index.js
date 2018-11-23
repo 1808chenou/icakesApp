@@ -12,10 +12,12 @@ import Detail  from '../components/pages/Detail/detail.vue'
 import My  from '../components/pages/My/my.vue'
 import Login  from '../components/pages/My/login.vue'
 import Reg  from '../components/pages/My/reg.vue'
+import Car from '../components/pages/Shopcar/car.vue'
 const router = new VueRouter({
   routes:[
    {  path: '/',redirect:'/home'},//重定向
    { path: '/home', component: Home ,name:'Home'},
+   { path: '/car', component: Car ,name:'Car'},
    { path: '/good', component: GoodList ,name:'GoodList'},
    { path: '/detail', component: Detail ,name:'Detail'},
    { path:'/my',component:My, name:'my',children:[

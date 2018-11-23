@@ -2,7 +2,7 @@
   <div id="bottom">
    	<ul class="bottom">
       <li v-for='(item,idx) in bottomlist' :key='idx' @click='change(item.path)'>
-        <p><i class="fa fa-university" aria-hidden="true"></i></p>
+        <p><i :class="item.icon" aria-hidden="true"></i></p>
         <p>{{item.name}}</p>
       </li>
     </ul>
@@ -19,7 +19,7 @@ export default {
   },
   data(){
     return {
-      bottomlist:[{name:'首页',path:'/home'},{name:'分类列表',path:'/good'}]
+      bottomlist:[{name:'首页',path:'/home',icon:'fa fa-university'},{name:'分类列表',path:'/good',icon:'fa fa-th-large'},{name:'购物车',path:'/car',icon:'fa fa-cart-arrow-down'},{name:'我',path:'/my',icon:'fa fa-user'}]
     }
   },
   methods:{

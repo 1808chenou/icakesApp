@@ -156,7 +156,7 @@ export default {
   //   },
   created(){
     this.getdata(this.$route.params.detailpath,this.$route.params.idx);
-    console.log(this.$route.params)
+    console.log(this.$route.params);
   },
   activated(){
         console.log('detailhhh')
