@@ -34,6 +34,10 @@ import 'mint-ui/lib/style.css'
 // 	return newstr
    
 // })
+
+import qs from 'qs'
+Vue.prototype.$qs=qs
+
 Vue.use(MintUI)
 /* eslint-disable no-new */
 new Vue({

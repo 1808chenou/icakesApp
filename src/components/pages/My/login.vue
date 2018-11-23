@@ -1,17 +1,17 @@
 <template>
 	<div class='login'>
          <div action="javascript:void(0);" class="jibai">
-          <label class='haha'>账号<input type="text" name="" placeholder="手机" class="uname"></label><br>
-           <label class='haha'>密码<input type="password" name="" placeholder="请输入密码" class="upassword"></label><br>
+          <label class='haha'>账号<input type="text" name="" placeholder="手机" class="uname" v-model="userName"></label><br>
+           <label class='haha'>密码<input type="password" name="" v-model="password" placeholder="请输入密码" class="upassword"></label><br>
            </div>
-            <p class="shuoming">请输入账号</p>
+            <p class="shuoming">{{shuoming}}</p>
 
-            <input type="button" name="" value="登录" class="loginBtn" >
+            <input type="button" name="" value="登录" class="loginBtn"   @click="login">
          
          <div class="laji">
              <div class="wang"><span>忘记密码?</span></div>
              <div class="gologin">
-                 <span>立即注册</span>
+                 <span @click="change">立即注册</span>
              </div>
          </div>
 	</div>
@@ -24,8 +24,38 @@ export default{
 	components:{},
     data(){
     	return {
-          
+            userName: '',
+            password: '',
+            shuoming:'',
     	}
+    },
+    methods:{
+         login(){
+            if(this.userName == "" && this.password == ""){
+            this.shuoming = '请输入账号名密码'
+             return;
+            }else{     
+                 if (!this.userName){
+                      console.log('请输入用户名');
+                      this.shuoming = '请输入用户名'
+                      return;
+                    }else{
+                      if (this.userName !== ''){ 
+                            if (!/^1[3456789]\d{9}$/.test(this.userName)){
+                                this.shuoming = '手机号码不正确'
+                            }
+                      }
+                    }
+                      if (this.password === '') {
+                         this.shuoming = '请输入密码'
+                        } else if(!/^[\u4e00-\u9fa5a-zA-Z0-9]{6,}$/.test(this.password)){
+                          this.shuoming = '密码不合法'
+                        }
+            }           
+        },
+         change(){
+            this.$router.push('/my/reg');
+        }
     },
     computed:{
     	
@@ -41,7 +71,7 @@ export default{
 .login{
     background: #EEEFF0;
    .padding(45,0,0,0);
-   .h(220);
+   // .h(230);
     .jibai{
         .padding(0,15,0,15);
         text-align: center;
@@ -53,9 +83,9 @@ export default{
         border-right:none;
         .haha{
             float:left;
-            .h(50);
+            .h(45);
             .fs(14);
-            .lh(50);
+            .lh(45);
             border-top:1px solid #DDDDDD;
 
         }
@@ -63,25 +93,27 @@ export default{
                 .padding(0,0,0,15);
                 // float: right;
                 .w(300);
-                .h(45);
-                .lh(45);
+                .h(40);
+                // .lh(45);
                 .fs(15);
                 color: #333;
                 border: none;
                 // border-bottom:1px solid #DDDDDD;
                 outline:none;
+                 border-radius:0px;
         }
         .upassword{
                 .padding(0,0,0,15);
              // float: right;
                 .w(300);
-                .h(45);
-                .lh(45);
+                .h(40);
+                // .lh(45);
                 .fs(15);
                 color: #333;
                 border: none;
                 // border-bottom:1px solid #DDDDDD;
                 outline:none;
+                 border-radius:0px;
         }
         
     }
@@ -91,11 +123,13 @@ export default{
             .h(25);
             .fs(14);
             .lh(25);
+            color:#F40606;
             float:left;
             text-align: center;
+
         }
         .loginBtn{
-             .margin(0,0,0,15);
+             .margin(15,0,15,15);
             .w(345);
             .h(42);
             .fs(16);
