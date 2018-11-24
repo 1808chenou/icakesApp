@@ -12,6 +12,7 @@ import Detail  from '../components/pages/Detail/detail.vue'
 import My  from '../components/pages/My/my.vue'
 import Login  from '../components/pages/My/login.vue'
 import Reg  from '../components/pages/My/reg.vue'
+import user  from '../components/pages/My/user.vue'
 import Car from '../components/pages/Shopcar/car.vue'
 const router = new VueRouter({
   routes:[
@@ -23,6 +24,7 @@ const router = new VueRouter({
    { path:'/my',component:My, name:'my',children:[
    			{ path:'login',component:Login, name:'login'},
    			{ path:'reg',component:Reg, name:'reg'},
+        { path:'user',component:user, name:'user'},
    ]}
   ]
 })

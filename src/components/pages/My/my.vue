@@ -1,5 +1,6 @@
 <template>
 	<div class='my'>
+
      <router-view></router-view>
      <bottom></bottom>
 	</div>
@@ -20,13 +21,16 @@ export default{
     	
     },
     created(){
-    //   let isLogin=true
-    //   if (isLogin) {
-    //       console.log(111)
-    //       this.$router.replace('/my/reg')
-    //   }else{
-    //     this.$router.replace('/my/login')
-    //   }
+      // let isLogin=true
+      let storage=window.localStorage
+      let yonghuming = storage.getItem("name")
+      if(yonghuming==null){
+
+       this.$router.replace('/my/login')
+
+      }else{
+        this.$router.replace('/my/user')
+      }
     }
   }	
 
