@@ -4,7 +4,7 @@
           <p class="ename"><b>{{test.handle}}</b></p>
           <p class="cname">{{test.name}}</p>
           <p class="miaoshu">{{test.short_desc}}</p>
-          <p class="jiage"><b>￥{{test.price_min|getDate}}-￥{{test.price_max|getDate}}</b></p>
+          <p class="jiage"><b>{{price}}</b></p>
     </div>
     <div class="time">
        <div class="left">
@@ -33,7 +33,8 @@ export default {
     return {
       hours:'',
       minute:'',
-      day:'今'
+      day:'今',
+      price:0,
     }
   },
   props:['test'],
@@ -49,11 +50,25 @@ export default {
         this.day='今';
         this.minute=new Date().getMinutes();
       }
-      console.log(new Date().getHours(),new Date().getMinutes())
+    },
+    getprice(){
+          if(this.test.price_min == this.test.price_max){
+
+            this.price ='￥'+  this.test.price_min;
+          }else{
+            this.price = '￥'+ this.test.price_min +'-￥'+this.test.price_max;
+          }
     }
   },
   created(){
     this.getTime();
+    this.getprice();
+  },
+  watch:{
+    test:function(newval,oldval){
+    this.getprice();
+      
+    }
   }
   
 }

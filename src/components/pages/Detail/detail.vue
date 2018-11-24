@@ -40,7 +40,7 @@
   <div class="size" v-if='appear'>
     <div class="top">
       <img :src="detailData.images[0].src" alt="">
-      <p class="price">{{detailData.price_min}}-￥{{detailData.price_max}}</p>
+      <p class="price">{{price}}</p>
       <p class="close" @click='appear=false'><i class="fa fa-times" aria-hidden="true"></i></p>
     </div>
     <div class="center" v-if='chicun'>
@@ -83,17 +83,19 @@ export default {
       chicun:false,
       highlight:'',
       stock:0,
-      buynum:1
+      buynum:1,
+      price:0,
+      username:'meiyue'
     }
   },
   methods:{
     getdata(path,idx){
       this.$axios.get(path)
       .then( (res)=> {
-        console.log(res.data.products[idx]);
+       console.log(res.data)
         this.detailData=res.data.products[idx];
+         this.getstock();
         //this.stock=this.detailData.variants[0].stock;
-        console.log('feifei')
         if(this.detailData.options[0].values){
           this.chicun=true
         }
@@ -102,11 +104,18 @@ export default {
         console.log(error);
       });
     },
+    getstock(){
+       
+       this.detailData.variants.map((item)=>{
+           this.stock += Number(item.stock)
+          return this.stock;
+        })
+    },
     gohome(){
       this.$router.push('/home');
     },
     gocar(){
-      
+      this.$router.push('/car');
     },
     back(){
       this.$router.go(-1)
@@ -117,6 +126,7 @@ export default {
     addclass(val){
       this.highlight=val.option_1;
       this.stock=val.stock;
+      this.price= '￥'+val.price;
     },
     jianiyi(){
       if(this.buynum <=1 ){
@@ -126,7 +136,11 @@ export default {
       }
     },
     jiayi(){
-      this.buynum++;
+      if(this.buynum >= this.stock){
+        this.buynum =this.stock;
+      }else{
+        this.buynum++;
+      }
     },
     gobuy(){
       if(this.highlight=='' && this.chicun==true){
@@ -137,30 +151,50 @@ export default {
     });
       }else{
       this.appear=false;
+      if(this.username !== ''){
+        this.$axios.post('./api/goods/addGoods',this.$qs.stringify({
+          goodsname:this.detailData.name,
+          type:this.highlight,
+          price:this.price,
+          imgpath:this.detailData.images[0].src,
+          num:this.buynum,
+          username:this.username
+         }))
+            .then( (res)=> {
+             console.log(res.data)
+             console.log(666)
+            })
+            .catch((error)=> {
+              console.log(error);
+            });
+      }
         Toast({
-      message: '已加入购物车',
-      duration: 1000,
-      iconClass: 'fa fa-check'
-    });
+          message: '已加入购物车',
+          duration: 1000,
+          iconClass: 'fa fa-check'
+        });
       }
       
+    },
+    getprice(){
+          if(this.detailData.price_min == this.detailData.price_max){
+            this.price ='￥'+  this.detailData.price_min;
+          }else{
+            this.price = '￥'+ this.detailData.price_min +'-￥'+this.detailData.price_max;
+          }
     }
   },
-  // beforeRouteLeave(to, from, next) {
-  //     if (to.path == "/good") {
-  //       to.meta.keepAlive = true;
-  //     } else {
-  //       to.meta.keepAlive = false;
-  //     }
-  //     next();
-  //   },
+
   created(){
     this.getdata(this.$route.params.detailpath,this.$route.params.idx);
-    console.log(this.$route.params);
+    this.getprice();
   },
-  activated(){
-        console.log('detailhhh')
-      }
+  watch:{
+    detailData:function(newval,oldval){
+    this.getprice();
+      
+    }
+  }
 }
 </script>
 

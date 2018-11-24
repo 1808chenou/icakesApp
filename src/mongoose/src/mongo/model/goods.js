@@ -2,13 +2,12 @@
  const mongoose = require('mongoose');
  let Schema = mongoose.Schema;
  let goodsSchema=new Schema({
- 	name:{type:String,required:true},
- 	type:{type:String,required:true},
- 	desc:{type:String,required:true},
+ 	goodsname:{type:String,required:true},
+ 	type:{type:String},
  	price:{type:String,required:true},
  	imgpath:{type:String,required:true},
- 	stock:{type:Number,required:true},
- 	grounding:{type:Boolean,default:false}
+ 	num:{type:Number,required:true},
+ 	username:{type:String,required:true},
 
  })
  // 将schema 对象转化为数据模型  model
