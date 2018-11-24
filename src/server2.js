@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const email=require('./mongoose/src/mongo/model/sendmail.js')
-console.log(email)
+console.log(email);
 const path =require('path');
 
 
