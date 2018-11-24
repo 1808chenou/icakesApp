@@ -145,8 +145,16 @@ export default{
     computed:{
         
     },
-    ceated(){
+    created(){
       // let isLogin=true
+
+      let storage=window.localStorage
+      let yonghuming = storage.getItem("name")
+      if(yonghuming==null){
+        console.log(456)
+      }else{
+        this.$router.replace('/my/user')
+      }
     }
 }   
 

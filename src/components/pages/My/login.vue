@@ -18,7 +18,7 @@
 </template>
 
 <script>
-
+import { Toast } from 'mint-ui';
 export default{
 	name:'Login',
 	components:{},
@@ -56,28 +56,37 @@ export default{
                         if(/^[\u4e00-\u9fa5a-zA-Z0-9]{6,}$/.test(this.password) && /^1[3456789]\d{9}$/.test(this.userName)) {
 
 
-                    this.$axios.post('/api/admin/getlogin',this.$qs.stringify({
-                            name:this.userName,
-                            pass:this.password,
+                            this.$axios.post('/api/admin/getlogin',this.$qs.stringify({
+                                    name:this.userName,
+                                    pass:this.password,
 
-                        })
-                    )
-               .then((res)=> {
-                    console.log(res);
-                    if(res.data.err==0){
-                            console.log('登录成功')
-                            console.log(res.data.data[0].name)
-                            let storage = window.localStorage
-                        storage.setItem("name",res.data.data[0].name)
-                        storage.setItem("password",res.data.data[0].pass)
-                        }else if(res.data.err==-1){
-                            alert("账号或密码错误")
-                        }          
-  
-                  })
-                  .catch((err)=> {
-                    console.log(err);
-                  });
+                                })
+                            )
+                           .then((res)=> {
+                              console.log(res);
+                              if(res.data.err==0){
+                                      console.log('登录成功')
+                                      console.log(res.data.data[0].name)
+                                      let storage = window.localStorage
+                                  storage.setItem("name",res.data.data[0].name)
+                                  // storage.setItem("password",res.data.data[0].pass)
+                                     Toast({
+                                      message: '登陆成功',
+                                      duration: 1000,
+                                      iconClass: 'fa fa-check'
+                                    });
+                                     this.$router.replace('/my/user')
+                                  }else if(res.data.err==-1){
+                                       console.log('登录失败')
+                                        Toast({
+                                      message: '账号或密码错误',
+                                      duration: 1000,
+                                      iconClass: 'fa fa-check'
+                                    });
+                                  }          
+              
+                          })
+ 
                         }
             }           
         },
