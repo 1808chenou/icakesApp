@@ -31,7 +31,7 @@ Router.post('/addGoods',(req,res)=>{
 
 Router.post('/getGoods',(req,res)=>{
   let username = req.body.username;
-  Goods.find({username:username})
+  Goods.find({username:username}).sort({_id:-1})
   .then((data)=>{
   	res.send({err:0,msg:'查询成功',data:data})
   })
@@ -118,4 +118,52 @@ Router.post('/updateNum',(req,res)=>{
 
 })
 
+//查询是否存在该商品
+Router.post('/getOne',(req,res)=>{
+// 1.接受数据
+  let {goodsname,type,price,imgpath,username}=req.body
+ Goods.find({goodsname,type,price,imgpath,username})
+ .then((data)=>{
+  res.send({err:0,msg:'查询成功',data:data})
+ })
+ .catch((err)=>{
+
+  console.log(err)
+    res.send({err:-1,msg:'查询成功',data:data})
+ })
+
+})
+
+//notype查询
+Router.post('/getnotype',(req,res)=>{
+// 1.接受数据
+  let {goodsname,price,imgpath,username}=req.body
+ Goods.find({goodsname,price,imgpath,username})
+ .then((data)=>{
+  res.send({err:0,msg:'查询成功',data:data})
+ })
+ .catch((err)=>{
+
+  console.log(err)
+    res.send({err:-1,msg:'查询失败',data:data})
+ })
+
+})
+
+Router.post('/addOne',(req,res)=>{
+// 1.接受数据
+let id = req.body.id
+  let {num}=req.body
+  console.log(num)
+ Goods.updateOne({_id:id},{num})
+ .then((data)=>{
+  res.send({err:0,msg:'修改成功',data:null})
+ })
+ .catch((err)=>{
+
+  console.log(err)
+    res.send({err:-1,msg:'修改失败',data:null})
+ })
+
+})
 module.exports=Router;

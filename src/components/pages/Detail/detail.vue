@@ -40,7 +40,7 @@
   <div class="size" v-if='appear'>
     <div class="top">
       <img :src="detailData.images[0].src" alt="">
-      <p class="price">{{price}}</p>
+      <p class="price">￥{{price}}</p>
       <p class="close" @click='appear=false'><i class="fa fa-times" aria-hidden="true"></i></p>
     </div>
     <div class="center" v-if='chicun'>
@@ -52,7 +52,7 @@
     </div>
     <div class="bottom">
       <span class="addnum">购买数量</span>&nbsp;&nbsp;&nbsp;
-      <span class="jian" @click='jianiyi'>-</span>&nbsp;&nbsp;&nbsp;<input type="number" name="" :value="buynum">&nbsp;&nbsp;&nbsp;<span class="jia" @click='jiayi'>+</span>
+      <span class="jian" @click='jianiyi'>-</span>&nbsp;&nbsp;&nbsp;<input type="number" name="" :value="buynum" @blur='changenum($event)'>&nbsp;&nbsp;&nbsp;<span class="jia" @click='jiayi'>+</span>
       <span>(库存为</span><span>{{stock}}</span><span>件)</span>
     </div>
     <div class="bb">
@@ -70,6 +70,7 @@ import Descdetail from './desc.vue'
 import detailbottom from './detailbottom.vue'
 import Size from './size.vue'
 import { Toast } from 'mint-ui';
+import $ from "jquery"
 
 export default {
   name: 'detail',
@@ -89,6 +90,16 @@ export default {
     }
   },
   methods:{
+    changenum(event){
+      let el = event.currentTarget;
+      if($(el).val()>=1){
+        this.buynum = $(el).val();
+        console.log($(el).val())
+      }else{
+        $(el).val(this.buynum);
+      }
+      
+    },
     getdata(path,idx){
       this.$axios.get(path)
       .then( (res)=> {
@@ -102,7 +113,7 @@ export default {
       })
       .catch((error)=> {
         console.log(error);
-      });
+      })
     },
     getstock(){
        
@@ -126,7 +137,7 @@ export default {
     addclass(val){
       this.highlight=val.option_1;
       this.stock=val.stock;
-      this.price= '￥'+val.price;
+      this.price= val.price;
     },
     jianiyi(){
       if(this.buynum <=1 ){
@@ -150,9 +161,25 @@ export default {
       //iconClass: 'fa fa-check'
     });
       }else{
+        console.log(this.chicun)
       this.appear=false;
-      if(this.username !== ''){
-        this.$axios.post('./api/goods/addGoods',this.$qs.stringify({
+      //console.log(this.detailData.options[0].values)
+      if(this.username !== '' && this.chicun==true){
+      this.$axios.post('./api/goods/getOne',this.$qs.stringify({
+          goodsname:this.detailData.name,
+          type:this.highlight,
+          price:this.price,
+          imgpath:this.detailData.images[0].src,
+          //num:this.buynum,
+          username:this.username
+         }))
+          .then( (res)=> {
+           console.log(res.data.data.length);
+           // var nnum =res.data.data[0].num;
+           // var goodsid = res.data.data[0]._id;
+           if(res.data.data.length ==0){
+            console.log(111)
+              this.$axios.post('./api/goods/addGoods',this.$qs.stringify({
           goodsname:this.detailData.name,
           type:this.highlight,
           price:this.price,
@@ -160,29 +187,119 @@ export default {
           num:this.buynum,
           username:this.username
          }))
-            .then( (res)=> {
-             console.log(res.data)
-             console.log(666)
-            })
-            .catch((error)=> {
-              console.log(error);
-            });
-      }
-        Toast({
+            .then( (res1)=> {
+             console.log(res1.data)
+             console.log(666);
+             Toast({
           message: '已加入购物车',
           duration: 1000,
           iconClass: 'fa fa-check'
         });
+            })
+            .catch((error)=> {
+              console.log(error);
+            })
+           }else{
+            var nnum =res.data.data[0].num;
+           var goodsid = res.data.data[0]._id;
+            var nnnum =nnum+this.buynum;
+            this.$axios.post('./api/goods/addOne',this.$qs.stringify({
+          num:nnnum,
+          id:goodsid
+         }))
+            .then( (res2)=> {
+             console.log(res2.data)
+             console.log(666);
+             Toast({
+          message: '已加入购物车',
+          duration: 1000,
+          iconClass: 'fa fa-check'
+        });
+            })
+            .catch((error)=> {
+              console.log(error);
+            })
+           }
+          })
+          .catch((error)=> {
+            console.log(error);
+          })
+        
+
+        
+      }else if(this.username !== '' && this.chicun==false){
+        console.log(this.detailData.name,this.price,this.detailData.images[0].src,this.username)
+        this.$axios.post('./api/goods/getnotype',this.$qs.stringify({
+          goodsname:this.detailData.name,
+          //type:'',
+          price:this.price,
+          imgpath:this.detailData.images[0].src,
+          //num:this.buynum,
+          username:this.username
+         }))
+          .then( (res)=> {
+           console.log(res.data);
+           // var nnum =res.data.data[0].num;
+           // var goodsid = res.data.data[0]._id;
+           if(res.data.data==[]){
+            console.log(111)
+              this.$axios.post('./api/goods/addGoods',this.$qs.stringify({
+          goodsname:this.detailData.name,
+          //type:this.highlight,
+          price:this.price,
+          imgpath:this.detailData.images[0].src,
+          num:this.buynum,
+          username:this.username
+         }))
+            .then( (res1)=> {
+             console.log(res1.data)
+             console.log(666);
+             Toast({
+          message: '已加入购物车',
+          duration: 1000,
+          iconClass: 'fa fa-check'
+        });
+            })
+            .catch((error)=> {
+              console.log(error);
+            })
+           }else{
+            var nnum =res.data.data[0].num;
+           var goodsid = res.data.data[0]._id;
+            var nnnum =nnum+this.buynum;
+            this.$axios.post('./api/goods/addOne',this.$qs.stringify({
+          num:nnnum,
+          id:goodsid
+         }))
+            .then( (res2)=> {
+             console.log(res2.data)
+             console.log(666);
+             Toast({
+          message: '已加入购物车',
+          duration: 1000,
+          iconClass: 'fa fa-check'
+        });
+            })
+            .catch((error)=> {
+              console.log(error);
+            })
+           }
+          })
+          .catch((error)=> {
+            console.log(error);
+          })
+        
+      }
       }
       
     },
     getprice(){
           if(this.detailData.price_min == this.detailData.price_max){
-            this.price ='￥'+  this.detailData.price_min;
+            this.price =  this.detailData.price_min;
           }else{
-            this.price = '￥'+ this.detailData.price_min +'-￥'+this.detailData.price_max;
+            this.price =this.detailData.price_min +'-￥'+this.detailData.price_max;
           }
-    }
+    },
   },
 
   created(){

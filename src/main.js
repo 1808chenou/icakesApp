@@ -11,6 +11,7 @@ Vue.filter('getDate', function (value) {
 
   return  newStr
 })
+//import Jquery from "../node_modules/jquery/dist/jquery.min.js"
 //路由
 import  router from  './router'
 //引入全局配置样式

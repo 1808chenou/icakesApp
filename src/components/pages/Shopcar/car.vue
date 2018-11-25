@@ -2,7 +2,7 @@
   <div class="car">
     <div class="top">
       <p class="topleft">
-        <input type="checkbox" @click='allchecked' :checked='isCheckedAll'>
+        <input type="checkbox" @click='allchecked($event)' :checked='isCheckedAll'>
         <span>全选</span>
         <span @click='alldel'>删除</span>
       </p>
@@ -17,7 +17,7 @@
     </ul>
     <ul class="goodslist">
       <li v-for ='(item,idx) in cardata' :key='idx'>
-        <input type="checkbox" name="" @click='schecked(item._id)' :checked='goodsid.indexOf(item._id)>=0'>
+        <input type="checkbox" name="" @click='schecked(item._id,$event)' :checked='goodsid.indexOf(item._id)>=0'>
         <div class="center">
           <div class="centertop">
             <img :src="item.imgpath" alt="">
@@ -29,11 +29,11 @@
         </div>
         </div>
         <div class="carright">
-          <span>{{item.price}}</span>
+          <span class="danjia">{{item.price}}</span>
           <span @click='remove(item._id)'>删除</span>
           <p>
             <span class="btn1" @click='jiayi(item)'>+</span>
-            <input type="num" :value='item.num'>
+            <input @blur='changenum($event,item)' type="num" :value='item.num'>
             <span class="btn1" @click='jianiyi(item)'>-</span>
           </p>
         </div>
@@ -41,7 +41,7 @@
     </ul>
     <div class="jiesuan">
       <div class="jieleft">
-        <p class="zongji"><span>总计:￥</span><span>111</span></p>
+        <p class="zongji"><span>总计:￥</span><span>{{dollar}}</span></p>
         <p>(不含运费)</p>
       </div>
       <div class="jieright">下单</div>
@@ -55,6 +55,7 @@
 <script>
 import bottom from '../../Common/bottom.vue'
 import { Toast } from 'mint-ui';
+import $ from "jquery"
 
 export default {
   name: 'car',
@@ -67,10 +68,21 @@ export default {
       cardata:[],
       isCheckedAll:true,
       goodsid:[],
-      obj:{}
+      obj:{},
+      dollar:0,
+      alldollar:0
   	}
   },
   methods:{
+    changenum(event,item){
+      let inputel= event.currentTarget;
+      console.log($(inputel).val());
+      if($(inputel).val()>=1){
+        this.numupdata($(inputel).val(),item._id)
+      }else{
+        $(inputel).val(item.num)
+      }
+    },
     getdata(){
        this.$axios.post('./api/goods/getGoods',this.$qs.stringify({
         username:'meiyue',
@@ -84,7 +96,13 @@ export default {
           this.goodsid.push(item._id);
           return this.goodsid;
         })
-        console.log(this.goodsid)
+        res.data.data.map((item)=>{
+          this.dollar += (item.num*item.price);
+          this.alldollar = this.dollar;
+          return this.dollar;
+        })
+        console.log(this.dollar)
+
       })
       .catch((error)=> {
         console.log(error);
@@ -108,7 +126,13 @@ export default {
         console.log(error);
       });
     },
-    allchecked(){
+    allchecked(event){
+      var allel = event.currentTarget;
+      if(allel.checked == false){
+        this.dollar = 0;
+      }else{
+        this.dollar= this.alldollar;
+      }
         this.isCheckedAll =!this.isCheckedAll;
         if(!this.isCheckedAll){
           this.goodsid=[];
@@ -124,29 +148,39 @@ export default {
 
  
     },
-    schecked(id){
+    schecked(id,event){
       console.log(id)
       if(this.goodsid.indexOf(id)>=0){
           this.goodsid.map((item,idx)=>{
               if(item == id){
               this.goodsid.splice(idx,1);
-              console.log(this.goodsid)
+              //console.log(this.goodsid)
             }
           })
       }else{
         this.goodsid.push(id);
-        console.log(this.goodsid)
+        //console.log(this.goodsid)
       }
       if(this.cardata.length===this.goodsid.length){
           this.isCheckedAll=true;
         }else{
           this.isCheckedAll=false;
         }
+        var el=event.currentTarget;
+        let danjiael =Number( $(el).next().next().find('span').filter('.danjia').text());
+        let numel=Number($(el).next().next().find('p').find('input').val());
+        console.log(el.checked);
+        if(el.checked ==true){
+            this.dollar += numel*danjiael;
+        }else{
+          this.dollar -= numel*danjiael;
+        }
+        console.log(this.dollar);
     },
     alldel(){
       console.log(this.goodsid);
       this.goodsid.map((item,idx)=>{
-        console.log(item)
+        //console.log(item)
         this.obj[idx] =item;
         return this.obj;
       })
@@ -186,7 +220,7 @@ export default {
     },
     jianiyi(item){
       if(item.num <=1 ){
-        item.num=1;
+        this.remove(item._id);
       }else{
         item.num--;
       }
