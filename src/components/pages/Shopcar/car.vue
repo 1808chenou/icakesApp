@@ -70,7 +70,8 @@ export default {
       goodsid:[],
       obj:{},
       dollar:0,
-      alldollar:0
+      alldollar:0,
+      username:''
   	}
   },
   methods:{
@@ -84,8 +85,11 @@ export default {
       }
     },
     getdata(){
+      this.$store.commit('setName');
+    this.username= this.$store.state.name;
+      console.log(this.username)
        this.$axios.post('./api/goods/getGoods',this.$qs.stringify({
-        username:'meiyue',
+        username:this.username,
        }))
       .then( (res)=> {
         console.log(res.data)

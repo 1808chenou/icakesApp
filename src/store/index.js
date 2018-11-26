@@ -8,8 +8,9 @@ const store = new Vuex.Store({
     slider:false
   },
   mutations: {
-    setName(state,name){
-    	state.name=name
+    setName(state){
+      let storage = window.localStorage;
+    	state.name =storage.getItem('name')
     },
     sliderShow(state,val){
     	state.slider=val
