@@ -24,7 +24,7 @@
         <p>返回</p>
       </li>
       <li class="add" @click='changeAppear'>加入购物车</li>
-      <li class="buy">立即购买</li>
+      <li class="buy" @click='changeAppear'>立即购买</li>
     </ul>
   </div>
   <transition
@@ -56,8 +56,8 @@
       <span>(库存为</span><span>{{stock}}</span><span>件)</span>
     </div>
     <div class="bb">
-      <p class="b1" @click='gobuy'>加入购物车</p>
-    <p class="b2">立即购买</p>
+      <p class="b1" @click='gobuy($event)'>加入购物车</p>
+    <p class="b2" @click='gobuy($event)'>立即购买</p>
     </div>
   </div>
   </transition>
@@ -90,6 +90,19 @@ export default {
     }
   },
   methods:{
+    // lijibuy(){
+    //   console.log(111)
+    //   this.gobuy();
+    //   if(this.highlight=='' && this.chicun==true){
+    //     Toast({
+    //   message: '请选择商品属性',
+    //   duration: 1000,
+    //   //iconClass: 'fa fa-check'
+    // });
+    //   }else{
+    //     this.$router.push('/car');
+    //   }
+    // },
     changenum(event){
       let el = event.currentTarget;
       if($(el).val()>=1){
@@ -153,7 +166,8 @@ export default {
         this.buynum++;
       }
     },
-    gobuy(){
+    gobuy(event){
+      let btnel=$(event.currentTarget).text()
       if(this.highlight=='' && this.chicun==true){
         Toast({
       message: '请选择商品属性',
@@ -190,11 +204,16 @@ export default {
             .then( (res1)=> {
              console.log(res1.data)
              console.log(666);
-             Toast({
-          message: '已加入购物车',
-          duration: 1000,
-          iconClass: 'fa fa-check'
-        });
+             console.log(btnel)
+             if( btnel =='立即购买'){
+              this.$router.push('/car')
+             }else{
+                Toast({
+                    message: '已加入购物车',
+                    duration: 1000,
+                    iconClass: 'fa fa-check'
+                  });
+             }
             })
             .catch((error)=> {
               console.log(error);
@@ -210,11 +229,15 @@ export default {
             .then( (res2)=> {
              console.log(res2.data)
              console.log(666);
-             Toast({
-          message: '已加入购物车',
-          duration: 1000,
-          iconClass: 'fa fa-check'
-        });
+             if( btnel =='立即购买'){
+              this.$router.push('/car')
+             }else{
+                Toast({
+                    message: '已加入购物车',
+                    duration: 1000,
+                    iconClass: 'fa fa-check'
+                  });
+             }
             })
             .catch((error)=> {
               console.log(error);
@@ -241,7 +264,7 @@ export default {
            console.log(res.data);
            // var nnum =res.data.data[0].num;
            // var goodsid = res.data.data[0]._id;
-           if(res.data.data==[]){
+           if(res.data.data.length==0){
             console.log(111)
               this.$axios.post('./api/goods/addGoods',this.$qs.stringify({
           goodsname:this.detailData.name,
@@ -254,11 +277,15 @@ export default {
             .then( (res1)=> {
              console.log(res1.data)
              console.log(666);
-             Toast({
-          message: '已加入购物车',
-          duration: 1000,
-          iconClass: 'fa fa-check'
-        });
+              if( btnel =='立即购买'){
+              this.$router.push('/car')
+             }else{
+                Toast({
+                    message: '已加入购物车',
+                    duration: 1000,
+                    iconClass: 'fa fa-check'
+                  });
+             }
             })
             .catch((error)=> {
               console.log(error);
@@ -274,11 +301,15 @@ export default {
             .then( (res2)=> {
              console.log(res2.data)
              console.log(666);
-             Toast({
-          message: '已加入购物车',
-          duration: 1000,
-          iconClass: 'fa fa-check'
-        });
+             if( btnel =='立即购买'){
+              this.$router.push('/car')
+             }else{
+                Toast({
+                    message: '已加入购物车',
+                    duration: 1000,
+                    iconClass: 'fa fa-check'
+                  });
+             }
             })
             .catch((error)=> {
               console.log(error);

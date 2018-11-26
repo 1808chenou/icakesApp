@@ -71,7 +71,10 @@ export default{
         this.getData()
         // console.log(this.$route.params.total);
         // this.path=this.$route.params.total;
-      }
+      },
+  // activated(){
+  //   this.getData();
+  // }
 }	
 
 </script>
