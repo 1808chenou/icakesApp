@@ -92,6 +92,9 @@ export default {
         username:this.username,
        }))
       .then( (res)=> {
+        if(res.data.data.length ==0){
+          this.dollar=0;
+        }
         console.log(res.data)
         console.log('feifei')
         this.cardata =res.data.data;

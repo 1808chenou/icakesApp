@@ -66,10 +66,19 @@ export default{
     path:function(newVal,oldVal){
       this.homeList=[]
       this.getData()
-    }
+    },
+    // homeList:function(newVal,oldVal){
+    //   let obj ={};
+    //   obj.gooddetail=this.homeList;
+    //   obj.time=new Date().getTime();
+    //   let storage = window.localStorage;
+    //   storage.setItem("goodstime", JSON.stringify(obj));
+    //   console.log(JSON.parse(localStorage.getItem("temp2")))
+    // }
   },
     created(){
-        this.getData()
+        this.getData();
+      
         // console.log(this.$route.params.total);
         // this.path=this.$route.params.total;
       },

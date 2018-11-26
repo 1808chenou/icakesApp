@@ -81,6 +81,9 @@ export default{
         this.selInit=this.$route.params.total;
         console.log(this.selInit)
         console.log(0)
+      }else{
+        let storage = window.localStorage;
+        this.selInit=storage.getItem('tabname');
       }
       },
       activated(){
@@ -89,6 +92,16 @@ export default{
         this.selInit=this.$route.params.total;
         console.log(this.selInit)
         console.log(0)
+      }else{
+        let storage = window.localStorage;
+        this.selInit=storage.getItem('tabname');
+      }
+    },
+    watch:{
+      selInit:function(newval,oldval){
+        let storage = window.localStorage;
+        storage.setItem('tabname', this.selInit);
+        console.log(storage.getItem('tabname'))
       }
     },
     mounted(){
