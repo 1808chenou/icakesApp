@@ -86,7 +86,9 @@ export default {
       stock:0,
       buynum:1,
       price:0,
-      username:''
+      username:'',
+      nowpath:'',
+      nowid:''
     }
   },
   methods:{
@@ -334,7 +336,9 @@ export default {
   },
 
   created(){
-    this.getdata(this.$route.params.detailpath,this.$route.params.idx);
+    this.nowpath=this.$route.params.detailpath;
+    this.nowid=this.$route.params.idx;
+    this.getdata(this.nowpath,this.nowid);
     this.getprice();
     this.$store.commit('setName');
     this.username= this.$store.state.name;
@@ -343,9 +347,12 @@ export default {
   watch:{
     detailData:function(newval,oldval){
     this.getprice();
+    console.log(this.nowpath,this.nowid)
       
-    }
-  }
+    },
+    
+
+  },
 }
 </script>
 
