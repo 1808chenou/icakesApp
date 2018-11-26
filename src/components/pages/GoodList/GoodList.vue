@@ -35,6 +35,7 @@ export default{
     data(){
     	return {
         homeList:[],
+        home2:[],
         name:112,
         // path:''
       }

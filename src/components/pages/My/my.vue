@@ -22,9 +22,20 @@ export default{
     },
     created(){
       // let isLogin=true
-      let storage=window.localStorage
-      let yonghuming = storage.getItem("name")
-      if(yonghuming==null){
+      this.$store.commit('setName');
+      this.username= this.$store.state.name;
+      if(this.username==null){
+
+       this.$router.replace('/my/login')
+
+      }else{
+        this.$router.replace('/my/user')
+      }
+    },
+    beforeUpdate(){
+      this.$store.commit('setName');
+      this.username= this.$store.state.name;
+      if(this.username==null){
 
        this.$router.replace('/my/login')
 
@@ -38,7 +49,7 @@ export default{
 <style lang="less" scoped>
 @import url('../../../styls/main.less');
 .my{
-    .padding(45,0,0,0);
+    .padding(45,0,51,0);
 	
 }
 </style>

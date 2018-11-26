@@ -70,6 +70,9 @@ export default{
                                       let storage = window.localStorage
                                   storage.setItem("name",res.data.data[0].name)
                                   // storage.setItem("password",res.data.data[0].pass)
+                                  this.$store.commit('setName');
+                                  this.username= this.$store.state.name;
+                                  // console.log(this.username)
                                      Toast({
                                       message: '登陆成功',
                                       duration: 1000,
