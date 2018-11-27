@@ -1,7 +1,7 @@
 <template>
   <div id="bottom">
    	<ul class="bottom">
-      <li v-for='(item,idx) in bottomlist' :key='idx' @click='change(item.path)'>
+      <li v-for='(item,idx) in bottomlist' :key='idx' @click='change(item)'>
         <p><i :class="item.icon" aria-hidden="true"></i></p>
         <p>{{item.name}}</p>
       </li>
@@ -23,8 +23,14 @@ export default {
     }
   },
   methods:{
-    change(path){
-      this.$router.push(path);
+    change(item){
+      if(item.name=='分类列表'){
+        this.$router.push({name:'GoodList',params:{
+          path:'http://icak.es/api/v1/type/view?handle=bdcakes&token=9dd5934c294149a8aaba5a3540d7f709&rnd=1542713382991'
+        }})
+      }else{
+        this.$router.push(item.path);
+      }
     }
   }
 }

@@ -60,7 +60,25 @@ export default {
     }
   },
   created(){
-    this.getdata(this.$route.params.detailpath,this.$route.params.idx);
+     this.nowpath=this.$route.params.detailpath;
+    this.nowid=this.$route.params.idx;
+        if(!this.nowpath){
+          let storagepath =JSON.parse(localStorage.getItem("pathid")).path;
+          let storageid =JSON.parse(localStorage.getItem("pathid")).nowid;
+          this.getdata(storagepath,storageid);
+        }else{
+
+    console.log(this.nowpath)
+     let obj ={};
+        obj.path=this.nowpath;
+        obj.nowid=this.nowid;
+        let storage = window.localStorage;
+        storage.setItem("pathid", JSON.stringify(obj));
+        console.log(JSON.parse(localStorage.getItem("pathid")));
+
+          this.getdata(this.nowpath,this.nowid);
+
+        }
     console.log(this.$route.params)
   },
   mounted(){

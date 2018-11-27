@@ -77,7 +77,10 @@ export default{
     //   next();
     // },
     created(){
-      if(this.$route.params.total){
+      console.log(this.$route.params)
+      if(this.$route.params.path){
+        this.selInit=this.$route.params.path;
+      }else if(this.$route.params.total){
         this.selInit=this.$route.params.total;
         console.log(this.selInit)
         console.log(0)
@@ -87,8 +90,11 @@ export default{
       }
       },
       activated(){
-        console.log('hhhh')
-        if(this.$route.params.total){
+        console.log(this.$route.params);
+        if(this.$route.params.path){
+        this.selInit=this.$route.params.path;
+        console.log(this.selInit)
+      }else if(this.$route.params.total){
         this.selInit=this.$route.params.total;
         console.log(this.selInit)
         console.log(0)

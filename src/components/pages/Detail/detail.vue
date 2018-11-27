@@ -210,15 +210,24 @@ export default {
              if( btnel =='立即购买'){
               this.$router.push('/car')
              }else{
+              if(res1.data.err=-1){
+                Toast({
+                    message: '加入失败',
+                    duration: 1000,
+                    iconClass: 'fa fa-frown-o'
+                  });
+              }else{
                 Toast({
                     message: '已加入购物车',
                     duration: 1000,
                     iconClass: 'fa fa-check'
                   });
+              }
              }
             })
             .catch((error)=> {
               console.log(error);
+
             })
            }else{
             var nnum =res.data.data[0].num;
@@ -336,9 +345,25 @@ export default {
   },
 
   created(){
-    this.nowpath=this.$route.params.detailpath;
+     this.nowpath=this.$route.params.detailpath;
     this.nowid=this.$route.params.idx;
-    this.getdata(this.nowpath,this.nowid);
+        if(!this.nowpath){
+          let storagepath =JSON.parse(localStorage.getItem("pathid")).path;
+          let storageid =JSON.parse(localStorage.getItem("pathid")).nowid;
+          this.getdata(storagepath,storageid);
+        }else{
+
+    console.log(this.nowpath)
+     let obj ={};
+        obj.path=this.nowpath;
+        obj.nowid=this.nowid;
+        let storage = window.localStorage;
+        storage.setItem("pathid", JSON.stringify(obj));
+        console.log(JSON.parse(localStorage.getItem("pathid")));
+
+          this.getdata(this.nowpath,this.nowid);
+
+        }
     this.getprice();
     this.$store.commit('setName');
     this.username= this.$store.state.name;

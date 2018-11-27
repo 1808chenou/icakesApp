@@ -24,6 +24,7 @@ export default{
       // let isLogin=true
       this.$store.commit('setName');
       this.username= this.$store.state.name;
+      console.log(111)
       if(this.username==null){
 
        this.$router.replace('/my/login')
@@ -32,17 +33,17 @@ export default{
         this.$router.replace('/my/user')
       }
     },
-    beforeUpdate(){
-      this.$store.commit('setName');
-      this.username= this.$store.state.name;
-      if(this.username==null){
+    // beforeUpdate(){
+    //   this.$store.commit('setName');
+    //   this.username= this.$store.state.name;
+    //   if(this.username==null){
 
-       this.$router.replace('/my/login')
+    //    this.$router.replace('/my/login')
 
-      }else{
-        this.$router.replace('/my/user')
-      }
-    }
+    //   }else{
+    //     this.$router.replace('/my/user')
+    //   }
+    // }
   }	
 
 </script>

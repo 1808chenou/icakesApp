@@ -66,25 +66,23 @@ export default{
     path:function(newVal,oldVal){
       this.homeList=[]
       this.getData()
+      console.log('createdhh')
     },
     // homeList:function(newVal,oldVal){
-    //   let obj ={};
-    //   obj.gooddetail=this.homeList;
-    //   obj.time=new Date().getTime();
-    //   let storage = window.localStorage;
-    //   storage.setItem("goodstime", JSON.stringify(obj));
-    //   console.log(JSON.parse(localStorage.getItem("temp2")))
+    //   if(this.homeList !=[]){
+        // let obj ={};
+        // obj.gooddetail=this.homeList;
+        // obj.time=new Date().getTime();
+        // let storage = window.localStorage;
+        // storage.setItem("goodstime", JSON.stringify(obj));
+    //     console.log(JSON.parse(localStorage.getItem("goodstime")))
+    //     }
     // }
   },
     created(){
         this.getData();
-      
-        // console.log(this.$route.params.total);
-        // this.path=this.$route.params.total;
+        
       },
-  // activated(){
-  //   this.getData();
-  // }
 }	
 
 </script>

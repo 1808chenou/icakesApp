@@ -60,21 +60,21 @@ export default {
   },
   created(){
     this.getdata(this.test);
-    window.onscroll = function(){
-      let scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
-      let windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
-      let scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
-      // console.log(scrollTop,windowHeight,scrollHeight)
-      // console.log(scrollTop+windowHeight)
-      if(scrollTop+windowHeight===scrollHeight){
-        Toast({
-            message: '到底啦',
-            position: 'bottom',
-            duration: 1000
-          });
-      }
+//     window.onscroll = function(){
+//       let scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+//       let windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+//       let scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
+//       // console.log(scrollTop,windowHeight,scrollHeight)
+//       // console.log(scrollTop+windowHeight)
+//       if(scrollTop+windowHeight===scrollHeight){
+//         Toast({
+//             message: '到底啦',
+//             position: 'bottom',
+//             duration: 1000
+//           });
+//       }
 
-    }
+//     }
   },
   mounted(){
     
