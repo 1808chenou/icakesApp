@@ -37,17 +37,16 @@ export default{
         homeList:[],
         home2:[],
         name:112,
-        // path:''
+        path:'',
+        length:''
       }
     },
    methods:{
       getData(){
-        console.log(123);
   //     // http://icak.es/api/v1/type/view?handle=cupcakes&token=9dd5934c294149a8aaba5a3540d7f709&rnd=1542698947024
       this.$axios.get(`${this.path}`)
       .then((res)=>{
         console.log(res.data.products)
-        // console.log(res.data.products[0].images[0].src)
         this.homeList=this.homeList.concat(res.data.products)
         console.log(this.homeList)
       })
@@ -66,19 +65,13 @@ export default{
     path:function(newVal,oldVal){
       this.homeList=[]
       this.getData()
-    },
-    // homeList:function(newVal,oldVal){
-    //   let obj ={};
-    //   obj.gooddetail=this.homeList;
-    //   obj.time=new Date().getTime();
-    //   let storage = window.localStorage;
-    //   storage.setItem("goodstime", JSON.stringify(obj));
-    //   console.log(JSON.parse(localStorage.getItem("temp2")))
-    // }
+    }
   },
     created(){
-        this.getData();
-      
+
+         this.getData()
+      // }
+        // this.getData()
         // console.log(this.$route.params.total);
         // this.path=this.$route.params.total;
       },

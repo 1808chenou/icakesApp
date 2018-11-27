@@ -27,6 +27,7 @@ export default {
   },
   methods:{
     fenlei(item){
+
       this.$router.push({name:'GoodList',params:{
         total:item.params
       }})

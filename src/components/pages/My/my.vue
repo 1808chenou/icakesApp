@@ -20,10 +20,15 @@ export default{
     computed:{
     	
     },
+    methods:{
+
+    },
     created(){
       // let isLogin=true
+      // this.$router.replace('/my/login')
       this.$store.commit('setName');
       this.username= this.$store.state.name;
+      console.log(this.username)
       if(this.username==null){
 
        this.$router.replace('/my/login')
@@ -31,18 +36,21 @@ export default{
       }else{
         this.$router.replace('/my/user')
       }
+      
     },
-    beforeUpdate(){
-      this.$store.commit('setName');
-      this.username= this.$store.state.name;
-      if(this.username==null){
+    // beforeMount(){
+    //   this.$router.replace('/my/login')
+    //   this.$store.commit('setName');
+    //   this.username= this.$store.state.name;
+    //   if(this.username==null){
 
-       this.$router.replace('/my/login')
+    //    this.$router.replace('/my/login')
 
-      }else{
-        this.$router.replace('/my/user')
-      }
-    }
+    //   }else{
+    //     this.$router.replace('/my/user')
+    //   }
+
+    // }
   }	
 
 </script>

@@ -152,6 +152,7 @@ export default{
       let yonghuming = storage.getItem("name")
       if(yonghuming==null){
         console.log(456)
+        
       }else{
         this.$router.replace('/my/user')
       }

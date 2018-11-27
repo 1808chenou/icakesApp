@@ -78,21 +78,26 @@ export default{
     // },
     created(){
       if(this.$route.params.total){
+
         this.selInit=this.$route.params.total;
         console.log(this.selInit)
-        console.log(0)
-      }else{
+        // console.log(0)
+      }else if(!this.$route.params.total){
         let storage = window.localStorage;
+        console.log(0)
         this.selInit=storage.getItem('tabname');
+      }else{
+        console.log(852)
+            this.selInit='http://icak.es/api/v1/type/view?handle=bdcakes&token=9dd5934c294149a8aaba5a3540d7f709&rnd=1542713382991'
       }
       },
       activated(){
-        console.log('hhhh')
+        // console.log('hhhh')
         if(this.$route.params.total){
         this.selInit=this.$route.params.total;
-        console.log(this.selInit)
-        console.log(0)
-      }else{
+        // console.log(this.selInit)
+        // console.log(0)
+      }else if(!this.$route.params.total){
         let storage = window.localStorage;
         this.selInit=storage.getItem('tabname');
       }
