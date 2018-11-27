@@ -47,6 +47,7 @@
       <div class="jieright">下单</div>
     </div>
     <bottom></bottom>
+    <p v-if='!username'>请先登录</p>
   </div>
   
 

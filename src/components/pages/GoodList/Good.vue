@@ -77,23 +77,30 @@ export default{
     //   next();
     // },
     created(){
-      if(this.$route.params.total){
+  
 
-        this.selInit=this.$route.params.total;
-        console.log(this.selInit)
-        // console.log(0)
-      }else if(!this.$route.params.total){
-        let storage = window.localStorage;
-        console.log(0)
-        this.selInit=storage.getItem('tabname');
-      }else{
-        console.log(852)
-            this.selInit='http://icak.es/api/v1/type/view?handle=bdcakes&token=9dd5934c294149a8aaba5a3540d7f709&rnd=1542713382991'
-      }
+
+        if(this.$route.params.path){
+          this.selInit=this.$route.params.path;
+        }else if(this.$route.params.total){
+          this.selInit=this.$route.params.total;
+          console.log(this.selInit)
+          // console.log(0)
+        }else if(!this.$route.params.total){
+          let storage = window.localStorage;
+          console.log(0)
+          this.selInit=storage.getItem('tabname');
+        }else{
+          console.log(852)
+              this.selInit='http://icak.es/api/v1/type/view?handle=bdcakes&token=9dd5934c294149a8aaba5a3540d7f709&rnd=1542713382991'
+        }
       },
       activated(){
         // console.log('hhhh')
-        if(this.$route.params.total){
+        if(this.$route.params.path){
+        this.selInit=this.$route.params.path;
+        console.log(this.selInit)
+      }else if(this.$route.params.total){
         this.selInit=this.$route.params.total;
         // console.log(this.selInit)
         // console.log(0)

@@ -74,10 +74,22 @@ export default{
         // this.getData()
         // console.log(this.$route.params.total);
         // this.path=this.$route.params.total;
+      console.log('createdhh')
+    },
+    // homeList:function(newVal,oldVal){
+    //   if(this.homeList !=[]){
+        // let obj ={};
+        // obj.gooddetail=this.homeList;
+        // obj.time=new Date().getTime();
+        // let storage = window.localStorage;
+        // storage.setItem("goodstime", JSON.stringify(obj));
+    //     console.log(JSON.parse(localStorage.getItem("goodstime")))
+    //     }
+    // }
+    created(){
+        this.getData();
+        
       },
-  // activated(){
-  //   this.getData();
-  // }
 }	
 
 </script>
