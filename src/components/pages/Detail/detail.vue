@@ -210,7 +210,7 @@ export default {
              if( btnel =='立即购买'){
               this.$router.push('/car')
              }else{
-              if(res1.data.err=-1){
+              if(res1.data.err==-1){
                 Toast({
                     message: '加入失败',
                     duration: 1000,
@@ -243,11 +243,19 @@ export default {
              if( btnel =='立即购买'){
               this.$router.push('/car')
              }else{
+                if(res1.data.err==-1){
+                Toast({
+                    message: '加入失败',
+                    duration: 1000,
+                    iconClass: 'fa fa-frown-o'
+                  });
+              }else{
                 Toast({
                     message: '已加入购物车',
                     duration: 1000,
                     iconClass: 'fa fa-check'
                   });
+              }
              }
             })
             .catch((error)=> {
@@ -291,11 +299,19 @@ export default {
               if( btnel =='立即购买'){
               this.$router.push('/car')
              }else{
+                if(res1.data.err==-1){
+                Toast({
+                    message: '加入失败',
+                    duration: 1000,
+                    iconClass: 'fa fa-frown-o'
+                  });
+              }else{
                 Toast({
                     message: '已加入购物车',
                     duration: 1000,
                     iconClass: 'fa fa-check'
                   });
+              }
              }
             })
             .catch((error)=> {

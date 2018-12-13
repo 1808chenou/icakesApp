@@ -37,8 +37,7 @@ export default{
         homeList:[],
         home2:[],
         name:112,
-        path:'',
-        length:''
+        
       }
     },
    methods:{

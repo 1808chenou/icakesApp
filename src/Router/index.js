@@ -22,6 +22,7 @@ const router = new VueRouter({
    { path: '/good', component: GoodList ,name:'GoodList'},
    { path: '/detail', component: Detail ,name:'Detail'},
    { path:'/my',component:My, name:'my',children:[
+   //{  path: '/my',redirect:'/my/login'},
    			{ path:'login',component:Login, name:'login'},
    			{ path:'reg',component:Reg, name:'reg'},
         { path:'user',component:user, name:'user'},
